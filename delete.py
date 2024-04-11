@@ -17,7 +17,8 @@ def delete_stop(input_file, stop_file):
             sen = ' '.join(token for token in tokens if token not in word_to_delete)
             if len(sen.strip().split(' ')) > 5:
                 output.append(sen.strip() + '\n')
-    with open('COVID_clean.txt', 'w', encoding='utf-8') as f:
+    output_file = input_file.split('.')[0] + '_remove.txt'
+    with open(output_file, 'w', encoding='utf-8') as f:
         for line in output:
             f.write(line)
     print('delete success')
