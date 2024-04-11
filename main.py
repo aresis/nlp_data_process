@@ -81,6 +81,7 @@ def process(text):
             line.append(token.lemma_.lower())
     # if len(line) >= 10:
     sen = ' '.join([word for word in line])
+    sen = remove_stopwords(remove_stopword(sen))
     return sen
     # return ''
 
