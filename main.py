@@ -61,6 +61,7 @@ with open('stopwords.txt', 'r', encoding='utf-8') as f:
 def remove_stopword(text):
     word_tokens = nltk.word_tokenize(text)
     text = " ".join([word for word in word_tokens if word not in stop])
+    print(text)
     return text
 
 
