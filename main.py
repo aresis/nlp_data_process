@@ -2,6 +2,7 @@ import re
 
 import enchant
 import nltk
+import preprocessor as pre
 import spacy
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -66,6 +67,7 @@ def remove_stopword(text):
 
 dic = enchant.Dict("en_US")
 nlp = spacy.load("en_core_web_lg", enable=["lemmatizer", "tagger", "attribute_ruler", "tok2vec"])
+pre.set_options(pre.OPT.URL, pre.OPT.NUMBER)
 
 
 def process(text):
@@ -73,7 +75,7 @@ def process(text):
     #     return ''
     p = TwitterPreprocessor(text).fully_preprocess()
     sentence = remove_stopwords(remove_stopword(p.text))
-    sen = nlp(sentence)
+    sen = nlp(pre.clean(sentence))
     line = []
     for token in sen:
         if dic.check(token.lemma_) == True and not nlp.vocab[token.lemma_].is_stop and len(
